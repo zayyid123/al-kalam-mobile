@@ -1,9 +1,11 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 
 const Toolbar = () => {
   return (
-    <Text>Toolbar</Text>
+    <View className='bg-white rounded-t-xl p-2 absolute bottom-0 right-0 left-0'>
+      
+    </View>
   )
 }
 
