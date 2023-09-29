@@ -7,7 +7,7 @@ import Toolbar from '../components/toolbar'
 
 const Layout = () => {
   return (
-    <View className='flex-1 bg-[#d7ebf8]'>
+    <View className='flex-1 bg-[#7f9caf]'>
       <View className='flex-1 bg-[#22282c] mt-[40px]'>
         <Navbar/>
           <Slot/>

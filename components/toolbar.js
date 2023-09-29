@@ -39,12 +39,12 @@ const Toolbar = () => {
             handleClickPerson()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isPersonClicked && 'border-[#22282c] rounded-full translate-y-[-40px] bg-[#f79d4a]'}`}>
-            <IconPerson width={30} height={30}/>
+          <View className={`p-3 border-4 border-white ${isPersonClicked && 'border-[#22282c] rounded-full translate-y-[-30px] bg-[#f79d4a]'}`}>
+            <IconPerson width={23} height={23}/>
           </View>
           {
             isPersonClicked &&
-            <Text className='absolute bottom-4 m-auto text-xs'>Profile</Text>
+            <Text className='absolute bottom-2 m-auto text-xs'>Profile</Text>
           }
         </Pressable>
 
@@ -55,12 +55,12 @@ const Toolbar = () => {
             handleClickHome()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isHomeClicked && 'border-[#22282c] rounded-full translate-y-[-40px] bg-[#f79d4a]'}`}>
-            <IconHome width={30} height={30}/>
+          <View className={`p-3 border-4 border-white ${isHomeClicked && 'border-[#22282c] rounded-full translate-y-[-30px] bg-[#f79d4a]'}`}>
+            <IconHome width={23} height={23}/>
           </View>
           {
             isHomeClicked &&
-            <Text className='absolute bottom-4 m-auto text-xs'>Home</Text>
+            <Text className='absolute bottom-2 m-auto text-xs'>Home</Text>
           }
         </Pressable>
 
@@ -71,12 +71,12 @@ const Toolbar = () => {
             handleClickBookmark()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isBookmarkClicked && 'border-[#22282c] rounded-full translate-y-[-40px] bg-[#f79d4a]'}`}>
-            <IconBookmark width={30} height={30}/>
+          <View className={`p-3 border-4 border-white ${isBookmarkClicked && 'border-[#22282c] rounded-full translate-y-[-30px] bg-[#f79d4a]'}`}>
+            <IconBookmark width={23} height={23}/>
           </View>
           {
             isBookmarkClicked &&
-            <Text className='absolute bottom-4 m-auto text-xs'>Bookmark</Text>
+            <Text className='absolute bottom-2 m-auto text-xs'>Bookmark</Text>
           }
         </Pressable>
       </View>
