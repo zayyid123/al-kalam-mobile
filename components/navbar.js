@@ -5,6 +5,7 @@ import { useColorScheme } from 'nativewind';
 
 // icon
 import IconBackWhite from '../assets/icons/back-icon_putih.svg'
+import IconBackGreen from '../assets/icons/back-icon_hijau.svg'
 
 const Navbar = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -25,12 +26,17 @@ const Navbar = () => {
         }
       >
         <View className='p-2 justify-center'>
-          <IconBackWhite width={20} height={20}/>
+          {
+            colorScheme === 'dark' ?
+            <IconBackWhite width={20} height={20}/>
+            :
+            <IconBackGreen width={20} height={20}/>
+          }
         </View>
       </TouchableOpacity>
 
       {/* name */}
-      <Text className='text-white font-semibold text-lg'>Al-Kalam</Text>
+      <Text className={`${colorScheme === 'dark' ? 'text-white' : 'text-[#166534]'} font-semibold text-lg`}>Al-Kalam</Text>
       
       {/* night mode */}
       <TouchableOpacity

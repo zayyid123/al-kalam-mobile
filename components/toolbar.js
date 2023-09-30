@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { router } from 'expo-router';
+import { useColorScheme } from 'nativewind';
 
 // svg
 import IconPerson from '../assets/icons/person.svg'
@@ -8,6 +9,7 @@ import IconHome from '../assets/icons/home.svg'
 import IconBookmark from '../assets/icons/bookmark.svg'
 
 const Toolbar = () => {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
   const [isPersonClicked, setisPersonClicked] = useState(false)
   const [isHomeClicked, setisHomeClicked] = useState(false)
   const [isBookmarkClicked, setisBookmarkClicked] = useState(false)
@@ -43,7 +45,7 @@ const Toolbar = () => {
             handleClickPerson()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isPersonClicked && 'border-[#22282c] rounded-full translate-y-[-30px] bg-[#f79d4a]'}`}>
+          <View className={`p-3 border-4 border-white ${isPersonClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
             <IconPerson width={23} height={23}/>
           </View>
           {
@@ -59,7 +61,7 @@ const Toolbar = () => {
             handleClickHome()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isHomeClicked && 'border-[#22282c] rounded-full translate-y-[-30px] bg-[#f79d4a]'}`}>
+          <View className={`p-3 border-4 border-white ${isHomeClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
             <IconHome width={23} height={23}/>
           </View>
           {
@@ -75,7 +77,7 @@ const Toolbar = () => {
             handleClickBookmark()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isBookmarkClicked && 'border-[#22282c] rounded-full translate-y-[-30px] bg-[#f79d4a]'}`}>
+          <View className={`p-3 border-4 border-white ${isBookmarkClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
             <IconBookmark width={23} height={23}/>
           </View>
           {
