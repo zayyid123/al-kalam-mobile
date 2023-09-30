@@ -47,7 +47,12 @@ export default function Page() {
       <View>
         <View className='flex-row justify-between items-start mt-3'>
           {/* Quran */}
-          <TouchableOpacity className='w-[50%]'>
+          <TouchableOpacity 
+            className='w-[50%]'
+            onPress={() => {
+              router.replace('/surah')
+            }}
+          >
             <LinearGradient
               colors={[colorScheme === 'dark' ? '#5d1e90' : '#3295ac', colorScheme === 'dark' ? '#892fd9' : '#4fc8e4']}
               className='p-3 ml-3 mr-1 rounded-xl'
