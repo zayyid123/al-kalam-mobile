@@ -1,8 +1,11 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
+import { useColorScheme } from "nativewind";
 
 export default function Page() {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+
   return (
     <View className='mb-20'>
       {/* logo quran */}
@@ -16,7 +19,7 @@ export default function Page() {
       {/* last read */}
       <TouchableOpacity>
         <LinearGradient
-          colors={['#19b1ae', '#45fffc']}
+          colors={[colorScheme === 'dark' ? '#19b1ae' : '#2AB2AF', colorScheme === 'dark' ? '#45fffc' : '#7DC694']}
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}
           className='p-3 mx-3 rounded-xl'
@@ -46,7 +49,7 @@ export default function Page() {
           {/* Quran */}
           <TouchableOpacity className='w-[50%]'>
             <LinearGradient
-              colors={['#5d1e90', '#892fd9']}
+              colors={[colorScheme === 'dark' ? '#5d1e90' : '#3295ac', colorScheme === 'dark' ? '#892fd9' : '#4fc8e4']}
               className='p-3 ml-3 mr-1 rounded-xl'
             >
               <View className='items-start justify-start'>
@@ -72,7 +75,7 @@ export default function Page() {
           {/* Adzan */}
           <TouchableOpacity className='w-[50%]'>
             <LinearGradient
-              colors={['#065a43', '#058a61']}
+              colors={[colorScheme === 'dark' ? '#065a43' : '#c55fa8', colorScheme === 'dark' ? '#058a61' : '#CC80B7']}
               className='p-3 mr-3 ml-1 rounded-xl'
             >
               <View className='items-start justify-start'>
@@ -100,7 +103,7 @@ export default function Page() {
           {/* Doa */}
           <TouchableOpacity className='w-[50%]'>
             <LinearGradient
-              colors={['#065a43', '#058a61']}
+              colors={[colorScheme === 'dark' ? '#065a43' : '#7446ac', colorScheme === 'dark' ? '#058a61' : '#A781D7']}
               className='p-3 ml-3 mr-1 rounded-xl'
             >
               <View className='items-start justify-start'>
@@ -131,7 +134,7 @@ export default function Page() {
             }}
           >
             <LinearGradient
-              colors={['#5d1e90', '#892fd9']}
+              colors={[colorScheme === 'dark' ? '#5d1e90' : '#5274c9', colorScheme === 'dark' ? '#892fd9' : '#8AA5E9']}
               className='p-3 mr-3 ml-1 rounded-xl'
             >
               <View className='items-start justify-start'>
