@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
+import { router } from 'expo-router';
 
 // svg
 import IconPerson from '../assets/icons/person.svg'
@@ -15,18 +16,21 @@ const Toolbar = () => {
     setisPersonClicked(!isPersonClicked)
     setisHomeClicked(false)
     setisBookmarkClicked(false)
+    router.replace('/profile');
   }
 
   const handleClickHome = () => {
     setisPersonClicked(false)
     setisHomeClicked(!isHomeClicked)
     setisBookmarkClicked(false)
+    router.replace('/');
   }
 
   const handleClickBookmark = () => {
     setisPersonClicked(false)
     setisHomeClicked(false)
     setisBookmarkClicked(!isBookmarkClicked)
+    router.replace('/bookmark');
   }
 
   return (

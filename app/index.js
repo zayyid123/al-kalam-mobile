@@ -1,9 +1,10 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { router } from 'expo-router';
 
 export default function Page() {
   return (
-    <View>
+    <View className='mb-20'>
       {/* logo quran */}
       <View className='justify-center items-center'>
         <Image 
@@ -123,7 +124,12 @@ export default function Page() {
           </TouchableOpacity>
           
           {/* Bookmark */}
-          <TouchableOpacity className='w-[50%] absolute right-0 top-[-30px]'>
+          <TouchableOpacity 
+            className='w-[50%] absolute right-0 top-[-30px]'
+            onPress={() => {
+              router.replace('/bookmark');
+            }}
+          >
             <LinearGradient
               colors={['#5d1e90', '#892fd9']}
               className='p-3 mr-3 ml-1 rounded-xl'
