@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { GetAllDataSurah } from '../services/surahServices';
+import * as Font from 'expo-font';
 
 const SurahPage = () => {
   const [allDataSurah, setallDataSurah] = useState();
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
     const getAllDataSurah = async() =>{
@@ -13,6 +15,32 @@ const SurahPage = () => {
 
     getAllDataSurah()
   }, [])
+
+  useEffect(() => {
+    Font.loadAsync({
+      'LPMQIsepMisbah': require('../assets/fonts/LPMQIsepMisbah.ttf'),
+    }).then(() => setFontsLoaded(true));
+  }, []);
+
+  if (!fontsLoaded) {
+    return (
+      <View
+        className='flex-1 justify-center items-center'
+      >
+        <Text className='font-bold text-lg'>Loading...</Text>
+      </View>
+    )
+  }
+
+  if (!allDataSurah) {
+    return (
+      <View
+        className='flex-1 justify-center items-center'
+      >
+        <Text className='font-bold text-lg'>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <View className='mx-3'>
@@ -68,7 +96,7 @@ const SurahPage = () => {
                 <View
                   className='justify-center'
                 >
-                  <Text className='font-bold text-xl text-[#166534]'>{res.nama}</Text>
+                  <Text style={{ fontFamily: 'LPMQIsepMisbah', fontSize: 20, color: '#166534' }}>{res.nama}</Text>
                 </View>
               </TouchableOpacity>
               <View style={{flex: 1, height: 0.5, backgroundColor: 'gray'}} />
