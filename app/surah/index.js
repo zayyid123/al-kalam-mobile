@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { GetAllDataSurah } from '../services/surahServices';
+import { GetAllDataSurah } from '../../services/surahServices';
 import * as Font from 'expo-font';
 import { useColorScheme } from 'nativewind';
+import { router } from 'expo-router';
 
 // SVG
-import IconSearch from '../assets/icons/img_icon_search.svg'
+import IconSearch from '../../assets/icons/img_icon_search.svg'
 
 const SurahPage = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -24,7 +25,7 @@ const SurahPage = () => {
 
   useEffect(() => {
     Font.loadAsync({
-      'LPMQIsepMisbah': require('../assets/fonts/LPMQIsepMisbah.ttf'),
+      'LPMQIsepMisbah': require('../../assets/fonts/LPMQIsepMisbah.ttf'),
     }).then(() => setFontsLoaded(true));
   }, []);
 
@@ -83,6 +84,9 @@ const SurahPage = () => {
             >
               <TouchableOpacity
                 className='mb-1 flex-row justify-between items-center'
+                onPress={() => {
+                  router.replace(`/surah/${res.nomor}`)
+                }}
               >
                 {/* detail */}
                 <View
@@ -95,12 +99,12 @@ const SurahPage = () => {
                     {
                       colorScheme === 'dark' ?
                       <Image
-                        source={require('../assets/image/penanda-putih.png')}
+                        source={require('../../assets/image/penanda-putih.png')}
                         className='w-[34px] h-[34px]'
                       />
                       :
                       <Image
-                        source={require('../assets/image/penanda-hijau.png')}
+                        source={require('../../assets/image/penanda-hijau.png')}
                         className='w-[34px] h-[34px]'
                       />
                     }

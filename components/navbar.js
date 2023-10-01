@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const handleBack = () => {
     if ( router.canGoBack() )
-      router.goBack();
+      router.back();
     else
       router.replace('/')
   }
