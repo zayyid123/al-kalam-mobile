@@ -11,11 +11,12 @@ const Layout = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
 
   return (
-    <View className={`flex-1 ${colorScheme === 'dark' ? 'bg-[#7f9caf]' : 'bg-white'}`}>
+    <View>
+      <StatusBar style='auto' translucent={false}/>
       <ScrollView>
         <LinearGradient
           colors={[colorScheme === 'dark' ? '#22282c' : '#e7fafe', colorScheme === 'dark' ? '#22282c' : '#67d1fc']}
-          className='flex-1 mt-[40px] min-h-screen'
+          className='flex-1 min-h-screen'
         >
           <Navbar/>
           <Slot/>
