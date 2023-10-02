@@ -18,7 +18,7 @@ const DetailSurah = () => {
   useEffect(() => {
     const getDetailSurah = async () => {
       const res = await GetDetailSurah(id)
-      setallDetailSurah(res.data)
+      setallDetailSurah(res.data.data)
     }
 
     getDetailSurah()
@@ -62,7 +62,7 @@ const DetailSurah = () => {
               <Text
                 className='text-white absolute'
               >
-                {allDetailSurah.nomor}
+                {allDetailSurah[0].surah_id}
               </Text>
             </View>
 
@@ -70,21 +70,21 @@ const DetailSurah = () => {
             <Text
               className='font-bold text-white mt-2 text-3xl'
             >
-              {allDetailSurah.nama_latin}
+              {allDetailSurah[0].surah.latin}
             </Text>
 
             {/* arti surat */}
             <Text
               className='text-white text-lg'
             >
-              {allDetailSurah.arti}
+              {allDetailSurah[0].surah.translation}
             </Text>
 
             {/* jumlah ayat dan turun */}
             <Text
               className='text-white font-light mt-6'
             >
-              {allDetailSurah.tempat_turun === 'mekah' ? 'Makiyah' : 'Madaniyah'} - {allDetailSurah.jumlah_ayat} ayat
+              {allDetailSurah[0].surah.location} - {allDetailSurah.length} ayat
             </Text>
 
             {/* bookmark */}
@@ -112,16 +112,20 @@ const DetailSurah = () => {
       </View>
 
       {/* card ayat */}
-      <FlatList
-        data={allDetailSurah.ayat}
-        scrollEnabled={false}
-        renderItem={({item}) => {
-          return(
-            <CardAyat data={item}/>
-          )
-        }}
-        keyExtractor={item => item.id}
-      />
+      {
+        allDetailSurah.length &&
+        <FlatList
+          data={allDetailSurah}
+          scrollEnabled={false}
+          renderItem={({item}) => {
+            return(
+              // <Text>{item.surah_id}</Text>
+              <CardAyat data={item}/>
+            )
+          }}
+          keyExtractor={item => item.id}
+        />
+      }
     </View>
   )
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-    baseURL: "https://quran-api.santrikoding.com",
+    baseURL: "https://web-api.qurankemenag.net",
 });
 
 axiosInstance.interceptors.request.use((config) => {
