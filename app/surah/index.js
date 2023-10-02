@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { GetAllDataSurah } from '../../services/surahServices';
+import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import * as Font from 'expo-font';
 import { useColorScheme } from 'nativewind';
 import { router } from 'expo-router';

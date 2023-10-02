@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { GetDetailSurah } from '../../services/surahServices';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useColorScheme } from "nativewind";
@@ -112,15 +112,16 @@ const DetailSurah = () => {
       </View>
 
       {/* card ayat */}
-      <>
-        {
-          allDetailSurah.ayat.map((res, index) => 
-            <View key={'ayat'+index}>
-              <CardAyat data={res}/>
-            </View>
+      <FlatList
+        data={allDetailSurah.ayat}
+        scrollEnabled={false}
+        renderItem={({item}) => {
+          return(
+            <CardAyat data={item}/>
           )
-        }
-      </>
+        }}
+        keyExtractor={item => item.id}
+      />
     </View>
   )
 }
