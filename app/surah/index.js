@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { GetAllDataSurah } from '../../services/surahServices';
 import * as Font from 'expo-font';
 import { useColorScheme } from 'nativewind';
@@ -55,69 +55,70 @@ const SurahPage = () => {
 
       {/* list surah */}
       <View
-        className='mt-3 mb-20'
+        className='mt-2 mb-20'
       >
-        {
-          allDataSurah &&
-          allDataSurah
-          .filter((data) => data.nama_latin.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((res, index) =>
-            <View 
-              key={'item'+index}
-              className='mb-6'
-            >
-              <TouchableOpacity
-                className='mb-1 flex-row justify-between items-center'
-                onPress={() => {
-                  router.push(`/surah/${res.nomor}`)
-                }}
+        <FlatList
+          data={allDataSurah.filter((data) => data.nama_latin.toLowerCase().includes(searchValue.toLowerCase()))}
+          scrollEnabled={false}
+          renderItem={({item}) => {
+            return(
+              <View 
+                className='mb-6'
               >
-                {/* detail */}
-                <View
-                  className='flex-row justify-between items-center'
+                <TouchableOpacity
+                  className='mb-1 flex-row justify-between items-center'
+                  onPress={() => {
+                    router.push(`/surah/${item.nomor}`)
+                  }}
                 >
-                  {/* nomor */}
+                  
                   <View
-                    className='justify-center items-center'
+                    className='flex-row justify-between items-center'
                   >
-                    {
-                      colorScheme === 'dark' ?
-                      <Image
-                        source={require('../../assets/image/penanda-putih.png')}
-                        className='w-[34px] h-[34px]'
-                      />
-                      :
-                      <Image
-                        source={require('../../assets/image/penanda-hijau.png')}
-                        className='w-[34px] h-[34px]'
-                      />
-                    }
-                    <Text
-                      className={`absolute text-xs ${colorScheme === 'dark' && 'text-white'}`}
+                    
+                    <View
+                      className='justify-center items-center'
                     >
-                      {res.nomor}
-                    </Text>
+                      {
+                        colorScheme === 'dark' ?
+                        <Image
+                          source={require('../../assets/image/penanda-putih.png')}
+                          className='w-[34px] h-[34px]'
+                        />
+                        :
+                        <Image
+                          source={require('../../assets/image/penanda-hijau.png')}
+                          className='w-[34px] h-[34px]'
+                        />
+                      }
+                      <Text
+                        className={`absolute text-xs ${colorScheme === 'dark' && 'text-white'}`}
+                      >
+                        {item.nomor}
+                      </Text>
+                    </View>
+
+                    <View
+                      className='ml-3'
+                    >
+                      <Text className={`font-bold text-base ${colorScheme === 'dark' && 'text-white'}`}>{item.nama_latin}</Text>
+                      <Text className={`font-thin text-sm ${colorScheme === 'dark' && 'text-[#32B0A8]'}`}>{item.tempat_turun === 'mekah' ? 'Makiyah' : 'Madaniyah'} - {item.jumlah_ayat} Ayat</Text>
+                    </View>
                   </View>
 
+                  
                   <View
-                    className='ml-3'
+                    className='justify-center'
                   >
-                    <Text className={`font-bold text-base ${colorScheme === 'dark' && 'text-white'}`}>{res.nama_latin}</Text>
-                    <Text className={`font-thin text-sm ${colorScheme === 'dark' && 'text-[#32B0A8]'}`}>{res.tempat_turun === 'mekah' ? 'Makiyah' : 'Madaniyah'} - {res.jumlah_ayat} Ayat</Text>
+                    <Text style={{ fontFamily: 'LPMQIsepMisbah', fontSize: 20, color: `${colorScheme === 'dark' ? '#fff' : '#166534'}` }}>{item.nama}</Text>
                   </View>
-                </View>
-
-                {/* nama arab */}
-                <View
-                  className='justify-center'
-                >
-                  <Text style={{ fontFamily: 'LPMQIsepMisbah', fontSize: 20, color: `${colorScheme === 'dark' ? '#fff' : '#166534'}` }}>{res.nama}</Text>
-                </View>
-              </TouchableOpacity>
-              <View style={{flex: 1, height: 0.5, backgroundColor: 'gray'}} />
-            </View>
-          )
-        }
+                </TouchableOpacity>
+                <View style={{ height: 0.5, backgroundColor: 'gray'}} />
+              </View>
+            )
+          }}
+          keyExtractor={item => item.nomor}
+        />
       </View>
     </View>
   )
