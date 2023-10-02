@@ -19,6 +19,9 @@ const Toolbar = () => {
     setisHomeClicked(false)
     setisBookmarkClicked(false)
     router.push('/profile');
+    setTimeout(() => {
+      setisPersonClicked(false)
+    }, 500);
   }
 
   const handleClickHome = () => {
@@ -26,6 +29,9 @@ const Toolbar = () => {
     setisHomeClicked(!isHomeClicked)
     setisBookmarkClicked(false)
     router.push('/');
+    setTimeout(() => {
+      setisHomeClicked(false)
+    }, 500);
   }
 
   const handleClickBookmark = () => {
@@ -33,6 +39,9 @@ const Toolbar = () => {
     setisHomeClicked(false)
     setisBookmarkClicked(!isBookmarkClicked)
     router.push('/bookmark');
+    setTimeout(() => {
+      setisBookmarkClicked(false)
+    }, 500);
   }
 
   return (

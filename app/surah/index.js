@@ -8,20 +8,14 @@ import { router } from 'expo-router';
 // SVG
 import IconSearch from '../../assets/icons/img_icon_search.svg'
 
+// all surah
+import AllDataSurahJson from '../../assets/surah/all_surah.json'
+
 const SurahPage = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
-  const [allDataSurah, setallDataSurah] = useState();
+  const [allDataSurah, setallDataSurah] = useState(AllDataSurahJson);
   const [searchValue, setsearchValue] = useState('')
   const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    const getAllDataSurah = async() =>{
-      const res = await GetAllDataSurah()
-      setallDataSurah(res.data)
-    }
-
-    getAllDataSurah()
-  }, [])
 
   useEffect(() => {
     Font.loadAsync({
@@ -30,16 +24,6 @@ const SurahPage = () => {
   }, []);
 
   if (!fontsLoaded) {
-    return (
-      <View
-        className='flex-1 justify-center items-center'
-      >
-        <Text className={`font-bold text-lg ${colorScheme === 'dark' && 'text-white'}`}>Loading...</Text>
-      </View>
-    )
-  }
-
-  if (!allDataSurah) {
     return (
       <View
         className='flex-1 justify-center items-center'
