@@ -50,7 +50,7 @@ export default function Page() {
           <TouchableOpacity 
             className='w-[50%]'
             onPress={() => {
-              router.replace('/surah')
+              router.push('/surah')
             }}
           >
             <LinearGradient
@@ -135,7 +135,7 @@ export default function Page() {
           <TouchableOpacity 
             className='w-[50%] absolute right-0 top-[-30px]'
             onPress={() => {
-              router.replace('/bookmark');
+              router.push('/bookmark');
             }}
           >
             <LinearGradient

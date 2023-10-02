@@ -18,21 +18,21 @@ const Toolbar = () => {
     setisPersonClicked(!isPersonClicked)
     setisHomeClicked(false)
     setisBookmarkClicked(false)
-    router.replace('/profile');
+    router.push('/profile');
   }
 
   const handleClickHome = () => {
     setisPersonClicked(false)
     setisHomeClicked(!isHomeClicked)
     setisBookmarkClicked(false)
-    router.replace('/');
+    router.push('/');
   }
 
   const handleClickBookmark = () => {
     setisPersonClicked(false)
     setisHomeClicked(false)
     setisBookmarkClicked(!isBookmarkClicked)
-    router.replace('/bookmark');
+    router.push('/bookmark');
   }
 
   return (

@@ -85,7 +85,7 @@ const SurahPage = () => {
               <TouchableOpacity
                 className='mb-1 flex-row justify-between items-center'
                 onPress={() => {
-                  router.replace(`/surah/${res.nomor}`)
+                  router.push(`/surah/${res.nomor}`)
                 }}
               >
                 {/* detail */}
