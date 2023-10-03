@@ -106,11 +106,20 @@ const DetailSurah = () => {
       <View
         className='my-3 items-center'
       >
-        <Image
-          source={require('../../assets/image/basmalah-light.png')}
-          className='w-full h-[80px]'
-          resizeMode="contain"
-        />
+        {
+          colorScheme === 'dark' ?
+          <Image
+            source={require('../../assets/image/basmalah-dark.png')}
+            className='w-full h-[80px]'
+            resizeMode="contain"
+          />
+          :
+          <Image
+            source={require('../../assets/image/basmalah-light.png')}
+            className='w-full h-[80px]'
+            resizeMode="contain"
+          />
+        }
       </View>
 
       {/* card ayat */}
