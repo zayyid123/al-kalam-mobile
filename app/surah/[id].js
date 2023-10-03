@@ -1,7 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react'
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
-import { GetDetailSurah } from '../../services/surahServices';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useColorScheme } from "nativewind";
 
@@ -10,18 +9,21 @@ import IconBookmarkPutih from '../../assets/icons/bookmark_putih.svg'
 import QuranPlayer from '../../components/quranPlayer';
 import CardAyat from '../../components/cardAyat';
 
+import detailSurahs from '../../assets/surah/detail/detail_surah';
+
 const DetailSurah = () => {
   const { id } = useLocalSearchParams();
   const { colorScheme, toggleColorScheme } = useColorScheme()
   const [allDetailSurah, setallDetailSurah] = useState()
 
   useEffect(() => {
-    const getDetailSurah = async () => {
-      const res = await GetDetailSurah(id)
-      setallDetailSurah(res.data.data)
+    const getDetailSurah = async (my_id) => {
+      setallDetailSurah(detailSurahs[my_id-1].data.data)
     }
 
-    getDetailSurah()
+    if (id) {
+      getDetailSurah(id)
+    }
   }, [])
 
   if (!allDetailSurah) {
@@ -98,7 +100,7 @@ const DetailSurah = () => {
       </View>
 
       {/* quran player */}
-      <QuranPlayer/>
+      <QuranPlayer id_surah={allDetailSurah[0].surah_id}/>
 
       {/* basmalah */}
       <View

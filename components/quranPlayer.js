@@ -1,12 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
+import { Audio } from 'expo-av';
 
 // svg
 import NavigationPlayer from '../assets/icons/navigation-audio.svg'
 import PlayQuran from '../assets/icons/play-audio.svg'
 
-const QuranPlayer = () => {
+const QuranPlayer = ({ id_surah }) => {
   const [progress, setprogress] = useState(0)
+  const [sound, setSound] = useState();
+
+  console.log(id_surah)
+
+  async function playSound() {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync({uri: "https://santrikoding.com/storage/audio/114.mp3"});
+    setSound(sound);
+
+    console.log('Playing Sound');
+    await sound.playAsync();
+  }
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
 
   return (
     <View
@@ -30,7 +52,11 @@ const QuranPlayer = () => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            playSound()
+          }}
+        >
           <View
             className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
           >
