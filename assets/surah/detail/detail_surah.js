@@ -173,6 +173,9 @@ const detailSurahs = [
     data: surah19
   },
   {
+    data: surah20
+  },
+  {
     data: surah21
   },
   {
@@ -198,6 +201,9 @@ const detailSurahs = [
   },
   {
     data: surah29
+  },
+  {
+    data: surah30
   },
   {
     data: surah31
@@ -227,6 +233,9 @@ const detailSurahs = [
     data: surah39
   },
   {
+    data: surah40
+  },
+  {
     data: surah41
   },
   {
@@ -252,6 +261,9 @@ const detailSurahs = [
   },
   {
     data: surah49
+  },
+  {
+    data: surah50
   },
   {
     data: surah51
@@ -281,6 +293,9 @@ const detailSurahs = [
     data: surah59
   },
   {
+    data: surah60
+  },
+  {
     data: surah61
   },
   {
@@ -306,6 +321,9 @@ const detailSurahs = [
   },
   {
     data: surah69
+  },
+  {
+    data: surah70
   },
   {
     data: surah71
@@ -335,6 +353,9 @@ const detailSurahs = [
     data: surah79
   },
   {
+    data: surah80
+  },
+  {
     data: surah81
   },
   {
@@ -360,6 +381,9 @@ const detailSurahs = [
   },
   {
     data: surah89
+  },
+  {
+    data: surah90
   },
   {
     data: surah91
