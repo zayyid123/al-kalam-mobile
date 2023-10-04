@@ -1,13 +1,29 @@
 {
   "expo": {
+    "orientation": "portrait",
+    "icon": "./assets/logo/icon.png",
     "scheme": "acme",
     "web": {
       "bundler": "metro"
     },
+    "splash": {
+      "image": "./assets/logo/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fff"
+    },
     "plugins": [
       "expo-router"
     ],
-    "name": "al-kalam-mobile",
-    "slug": "al-kalam-mobile"
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo/adaptive-icon.png",
+        "backgroundColor": "#fff"
+      }
+    },
+    "name": "al-kalam",
+    "slug": "al-kalam"
   }
 }
