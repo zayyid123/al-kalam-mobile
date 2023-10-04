@@ -18,11 +18,11 @@ const DetailSurah = () => {
   const [allDetailSurah, setallDetailSurah] = useState()
   const [lastRead, setlastRead] = useState()
 
-  useEffect(() => {
-    const getDetailSurah = async (my_id) => {
-      setallDetailSurah(detailSurahs[my_id-1].data.data)
-    } 
+  const getDetailSurah = async (my_id) => {
+    setallDetailSurah(detailSurahs[my_id-1].data.data)
+  } 
 
+  useEffect(() => {
     if (id) {
       getDetailSurah(id)
     }
@@ -46,7 +46,9 @@ const DetailSurah = () => {
   const addLastRead = async (key, value) => {
     try {
       await AsyncStorage.setItem(key, value);
-      setlastRead(value)
+      await setlastRead(JSON.parse(value))
+      await setallDetailSurah()
+      await getDetailSurah(id)
       Alert.alert('Terakhir Dibaca','Berhasil menambahkan ke terakhir dibaca')
     } catch (error) {
       Alert.alert('Error',error)

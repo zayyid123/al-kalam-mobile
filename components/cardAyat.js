@@ -9,7 +9,6 @@ import IconShare from '../assets/icons/share.svg'
 
 const CardAyat = ({ data, storeData, lastRead }) => {
   const { colorScheme, toggleColorScheme } = useColorScheme()
-  const [isClicked, setisClicked] = useState(false)
   const [isLoading, setisLoading] = useState(false)
 
   return (
@@ -42,7 +41,6 @@ const CardAyat = ({ data, storeData, lastRead }) => {
           <TouchableOpacity
             onPress={async() => {
               await setisLoading(true)
-              await setisClicked(true)
               await storeData('last_read', JSON.stringify(
                 {
                   ayat: data.ayah,
@@ -55,31 +53,17 @@ const CardAyat = ({ data, storeData, lastRead }) => {
           >
             {
               lastRead &&
-              !isClicked ?
-              <View>
+              !isLoading ?
+              <>
                 {
-                  !isLoading ?
-                  <>
-                    {
-                      ( lastRead.ayat === data.ayah && lastRead.noSurah === data.surah.id ) ?
-                      <IconPined width={25} height={25} />
-                      :
-                      <IconPin width={25} height={25} />
-                    }
-                  </>
-                  :
-                  <ActivityIndicator size={'small'}/>
-                }
-              </View>
-              :
-              <View>
-                {
-                  !isLoading ?
+                  ( lastRead.ayat === data.ayah && lastRead.noSurah === data.surah.id ) ?
                   <IconPined width={25} height={25} />
                   :
-                  <ActivityIndicator size={'small'}/>
+                  <IconPin width={25} height={25} />
                 }
-              </View>
+              </>
+              :
+              <ActivityIndicator size={'small'}/>
             }
           </TouchableOpacity>
         </View>
