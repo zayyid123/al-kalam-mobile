@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/logo/adaptive-icon.png",
         "backgroundColor": "#fff"
       },
-      "versionCode": 1
+      "versionCode": 1,
+      "package": "com.zayyid123.alkalam"
     },
     "name": "Al-Kalam",
     "slug": "al-kalam",
