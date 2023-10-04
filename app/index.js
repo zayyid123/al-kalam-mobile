@@ -23,13 +23,17 @@ export default function Page() {
         const value = await AsyncStorage.getItem('last_read');
         if (value !== null) {
           setlastRead(JSON.parse(value))
+        } else {
+          const defaultValue = {
+            ayat: 1,
+            noSurah: 1,
+            surah: 'Al-Fatihah'
+          }
+          await AsyncStorage.setItem('last_read', JSON.stringify(defaultValue));
+          setlastRead(defaultValue)
         }
       } catch (error) {
-        setlastRead({
-          ayat: 1,
-          noSurah: 1,
-          surah: 'Al-Fatihah'
-        })
+        alert(error)
       }
     }
 

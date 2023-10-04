@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // svg
 import IconBookmarkPutih from '../../assets/icons/bookmark_putih.svg'
+import IconBookmarked from '../../assets/icons/bookmarked_putih.svg'
 import QuranPlayer from '../../components/quranPlayer';
 import CardAyat from '../../components/cardAyat';
 
@@ -17,30 +18,47 @@ const DetailSurah = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme()
   const [allDetailSurah, setallDetailSurah] = useState()
   const [lastRead, setlastRead] = useState()
+  const [bookmark, setbookmark] = useState()
+  const [isBookmark, setisBookmark] = useState(false)
 
   const getDetailSurah = async (my_id) => {
     setallDetailSurah(detailSurahs[my_id-1].data.data)
   } 
 
+  const getLastRead = async() => {
+    try {
+      const value = await AsyncStorage.getItem('last_read');
+      if (value !== null) {
+        setlastRead(JSON.parse(value))
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+  
+  const getBookmark = async() => {
+    try {
+      const value = await AsyncStorage.getItem('bookmark');
+      if (value !== null) {
+        const dataBookmark = JSON.parse(value)
+        setbookmark(dataBookmark)
+        dataBookmark.forEach((data, index) => {
+          if (data === id) {
+            setisBookmark(true)
+          }
+        })
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   useEffect(() => {
     if (id) {
       getDetailSurah(id)
     }
-  }, [])
-
-  useEffect(() => {
-    const getLastRead = async() => {
-      try {
-        const value = await AsyncStorage.getItem('last_read');
-        if (value !== null) {
-          setlastRead(JSON.parse(value))
-        }
-      } catch (error) {
-        alert(error)
-      }
-    }
-
     getLastRead()
+    getBookmark()
   }, [])
   
   const addLastRead = async (key, value) => {
@@ -54,6 +72,34 @@ const DetailSurah = () => {
       Alert.alert('Error',error)
     }
   };
+
+  const addBookmark = async() => {
+    const data = await AsyncStorage.getItem('bookmark');
+    Alert.alert('Tambah Bookmark','Berhasil menambahkan ke Bookmark')
+    setisBookmark(true)
+    if (data === null) {
+      await AsyncStorage.setItem('bookmark', JSON.stringify([id]));
+    } else {
+      const dataParser = JSON.parse(data)
+      const myAllData = [
+        ...dataParser, id
+      ]
+      await AsyncStorage.setItem('bookmark', JSON.stringify(myAllData));
+    }
+  }
+
+  const removeBookmark = async() => {
+    const data = await AsyncStorage.getItem('bookmark');
+    Alert.alert('Hapus Bookmark','Berhasil hapus Bookmark')
+    setisBookmark(false)
+    const dataParser = JSON.parse(data)
+    dataParser.forEach((data, index) => {
+      if (data === id) {
+        dataParser.splice(index, 1)
+        AsyncStorage.setItem('bookmark', JSON.stringify(dataParser));
+      }
+    })
+  }
 
   if (!allDetailSurah) {
     return (
@@ -121,8 +167,16 @@ const DetailSurah = () => {
             {/* bookmark */}
             <TouchableOpacity
               className='absolute right-0'
+              onPress={() => {
+                isBookmark ? removeBookmark() : addBookmark()
+              }}
             >
-              <IconBookmarkPutih width={30} height={30}/>
+              {
+                isBookmark ?
+                <IconBookmarked width={30} height={30}/>
+                :
+                <IconBookmarkPutih width={30} height={30}/>
+              }
             </TouchableOpacity>
           </View>
         </LinearGradient>
