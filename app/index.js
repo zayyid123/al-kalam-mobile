@@ -4,10 +4,18 @@ import { router } from 'expo-router';
 import { useColorScheme } from "nativewind";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Font from 'expo-font';
 
 export default function Page() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const [lastRead, setlastRead] = useState()
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    Font.loadAsync({
+      'LPMQIsepMisbah': require('../assets/fonts/LPMQIsepMisbah.ttf'),
+    }).then(() => setFontsLoaded(true));
+  }, []);
 
   useEffect(() => {
     const getLastRead = async() => {
@@ -17,12 +25,26 @@ export default function Page() {
           setlastRead(JSON.parse(value))
         }
       } catch (error) {
-        alert(error)
+        setlastRead({
+          ayat: 1,
+          noSurah: 1,
+          surah: 'Al-Fatihah'
+        })
       }
     }
 
     getLastRead()
   }, [])
+
+  if (!fontsLoaded) {
+    return (
+      <View
+        className='flex-1 justify-center items-center'
+      >
+        <Text className={`font-bold text-lg ${colorScheme === 'dark' && 'text-white'}`}>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <View className='mb-20'>

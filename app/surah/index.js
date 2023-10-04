@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import * as Font from 'expo-font';
 import { useColorScheme } from 'nativewind';
 import { router } from 'expo-router';
 
@@ -14,23 +13,6 @@ const SurahPage = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const [allDataSurah, setallDataSurah] = useState(AllDataSurahJson);
   const [searchValue, setsearchValue] = useState('')
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    Font.loadAsync({
-      'LPMQIsepMisbah': require('../../assets/fonts/LPMQIsepMisbah.ttf'),
-    }).then(() => setFontsLoaded(true));
-  }, []);
-
-  if (!fontsLoaded) {
-    return (
-      <View
-        className='flex-1 justify-center items-center'
-      >
-        <Text className={`font-bold text-lg ${colorScheme === 'dark' && 'text-white'}`}>Loading...</Text>
-      </View>
-    )
-  }
 
   return (
     <View className='mx-3'>

@@ -2,7 +2,6 @@ import { LinearGradient } from 'expo-linear-gradient'
 import React, { useEffect, useState } from 'react'
 import { FlatList, Image, Text, TextInput, View } from 'react-native'
 import { useColorScheme } from "nativewind";
-import * as Font from 'expo-font';
 
 // db doa
 import Db_doa from '../../assets/doa/db_doa.json'
@@ -17,23 +16,6 @@ const DoaPage = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const [allDataDua, setallDataDua] = useState(Db_doa)
   const [searchValue, setsearchValue] = useState('')
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    Font.loadAsync({
-      'LPMQIsepMisbah': require('../../assets/fonts/LPMQIsepMisbah.ttf'),
-    }).then(() => setFontsLoaded(true));
-  }, []);
-
-  if (!fontsLoaded) {
-    return (
-      <View
-        className='flex-1 justify-center items-center'
-      >
-        <Text className={`font-bold text-lg ${colorScheme === 'dark' && 'text-white'}`}>Loading...</Text>
-      </View>
-    )
-  }
 
   return (
     <View

@@ -46,6 +46,7 @@ const DetailSurah = () => {
   const addLastRead = async (key, value) => {
     try {
       await AsyncStorage.setItem(key, value);
+      setlastRead(value)
       Alert.alert('Terakhir Dibaca','Berhasil menambahkan ke terakhir dibaca')
     } catch (error) {
       Alert.alert('Error',error)
