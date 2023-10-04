@@ -1,12 +1,15 @@
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
 import { Image, Text, View } from 'react-native'
+import { useColorScheme } from "nativewind";
 
 const Bookmark = () => {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+
   return (
     <View>
       <LinearGradient
-        colors={['#19b1ae', '#45fffc']}
+        colors={[colorScheme === 'dark' ? '#19b1ae' : '#2AB2AF', colorScheme === 'dark' ? '#45fffc' : '#7DC694']}
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 0.5 }}
         className='p-3 mx-3 rounded-xl'

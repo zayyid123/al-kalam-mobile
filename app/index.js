@@ -106,7 +106,12 @@ export default function Page() {
 
         <View className='flex-row justify-between items-start mt-3 pb-5'>
           {/* Doa */}
-          <TouchableOpacity className='w-[50%]'>
+          <TouchableOpacity 
+            className='w-[50%]'
+            onPress={() => {
+              router.push('/doa')
+            }}
+          >
             <LinearGradient
               colors={[colorScheme === 'dark' ? '#065a43' : '#7446ac', colorScheme === 'dark' ? '#058a61' : '#A781D7']}
               className='p-3 ml-3 mr-1 rounded-xl'
