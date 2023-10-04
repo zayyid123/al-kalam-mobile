@@ -13,6 +13,7 @@ const QuranPlayer = ({ id_surah }) => {
   const [isLoading, setisLoading] = useState(false)
   const [isPlay, setisPlay] = useState(false)
   const [sound, setSound] = useState();
+  const [isConnected, setIsConnected] = useState(false);
 
   const convertToThreeLength = (id) => {
     // Konversi id ke dalam bentuk string
@@ -55,7 +56,20 @@ const QuranPlayer = ({ id_surah }) => {
       setisLoading(false)
     }
 
-    loadAudio()
+    const checkInternetConnection = async () => {
+      try {
+        const response = await fetch('https://www.google.com', {
+          method: 'HEAD',
+          cache: 'no-store',
+        });
+        setIsConnected(true);
+        loadAudio()
+      } catch (error) {
+        setIsConnected(false);
+      }
+    };
+
+    checkInternetConnection();
   }, [])
 
   const hanldeResetAudio = () => {
@@ -103,86 +117,95 @@ const QuranPlayer = ({ id_surah }) => {
       </View>
 
       {/* player */}
-      <View
-        className='flex-row justify-between items-center'
-      >
-        {/* back */}
-        <TouchableOpacity
-          onPress={() => {
-            handlePreftAudio()
-          }}
+      {
+        isConnected ?
+        <View
+          className='flex-row justify-between items-center'
         >
-          <View
-            className='-rotate-180 bg-[#def7f5] p-2 rounded-full'
+          {/* back */}
+          <TouchableOpacity
+            onPress={() => {
+              handlePreftAudio()
+            }}
           >
-            <NavigationPlayer width={15} height={15} />
-          </View>
-        </TouchableOpacity>
+            <View
+              className='-rotate-180 bg-[#def7f5] p-2 rounded-full'
+            >
+              <NavigationPlayer width={15} height={15} />
+            </View>
+          </TouchableOpacity>
 
-        {
-          !isLoading ?
-          <View>
-            {
-              !isPlay ?
-                stateStatus && stateStatus.didJustFinish ?
+          {
+            !isLoading ?
+            <View>
+              {
+                !isPlay ?
+                  stateStatus && stateStatus.didJustFinish ?
+                    <TouchableOpacity
+                      onPress={() => {
+                        hanldeResetAudio()
+                      }}
+                    >
+                      <View
+                        className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
+                      >
+                        <View className='bg-black w-[20px] h-[20px] m-[2.5px]'></View>
+                      </View>
+                    </TouchableOpacity>
+                  :
                   <TouchableOpacity
                     onPress={() => {
-                      hanldeResetAudio()
+                      playSound()
                     }}
                   >
                     <View
                       className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
                     >
-                      <View className='bg-black w-[20px] h-[20px] m-[2.5px]'></View>
+                      <PlayQuran width={25} height={25}/>
                     </View>
                   </TouchableOpacity>
                 :
                 <TouchableOpacity
                   onPress={() => {
-                    playSound()
+                    pauseSound()
                   }}
                 >
                   <View
                     className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
                   >
-                    <PlayQuran width={25} height={25}/>
+                    <PauseQuran width={25} height={25}/>
                   </View>
                 </TouchableOpacity>
-              :
-              <TouchableOpacity
-                onPress={() => {
-                  pauseSound()
-                }}
-              >
-                <View
-                  className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
-                >
-                  <PauseQuran width={25} height={25}/>
-                </View>
-              </TouchableOpacity>
-            }
-          </View>
-          :
-          <View
-            className='p-2 rounded-full mx-2 my-2'
-          >
-            <ActivityIndicator size="small" />
-          </View>
-        }
+              }
+            </View>
+            :
+            <View
+              className='p-2 rounded-full mx-2 my-2'
+            >
+              <ActivityIndicator size="small" />
+            </View>
+          }
 
-        {/* next */}
-        <TouchableOpacity
-          onPress={() => {
-            handleNextAudio()
-          }}
-        >
-          <View
-            className='bg-[#def7f5] p-2 rounded-full'
+          {/* next */}
+          <TouchableOpacity
+            onPress={() => {
+              handleNextAudio()
+            }}
           >
-            <NavigationPlayer width={15} height={15}/>
-          </View>
-        </TouchableOpacity>
-      </View>
+            <View
+              className='bg-[#def7f5] p-2 rounded-full'
+            >
+              <NavigationPlayer width={15} height={15}/>
+            </View>
+          </TouchableOpacity>
+        </View>
+        :
+        <View
+          className='flex-row justify-between items-center'
+        >
+          <Text>No Internet</Text>
+        </View>
+      }
     </View>
   )
 }
