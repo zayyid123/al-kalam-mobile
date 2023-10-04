@@ -2,9 +2,27 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useColorScheme } from "nativewind";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Page() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
+  const [lastRead, setlastRead] = useState()
+
+  useEffect(() => {
+    const getLastRead = async() => {
+      try {
+        const value = await AsyncStorage.getItem('last_read');
+        if (value !== null) {
+          setlastRead(JSON.parse(value))
+        }
+      } catch (error) {
+        alert(error)
+      }
+    }
+
+    getLastRead()
+  }, [])
 
   return (
     <View className='mb-20'>
@@ -17,7 +35,12 @@ export default function Page() {
       </View>
 
       {/* last read */}
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          lastRead &&
+          router.push(`/surah/${lastRead.noSurah}`)
+        }}
+      >
         <LinearGradient
           colors={[colorScheme === 'dark' ? '#19b1ae' : '#2AB2AF', colorScheme === 'dark' ? '#45fffc' : '#7DC694']}
           start={{ x: 0, y: 0.5 }}
@@ -29,9 +52,14 @@ export default function Page() {
               <Text className='text-white mb-3 font-light'>Last Read</Text>
 
               {/* ayat */}
-              <Text className='text-white font-semibold text-base'>Al-Fatihah</Text>
-              <Text className='text-white font-light'>Ayat - No. 1</Text>
-              <Text className='text-white font-light'>Baca {'>'}</Text>
+              {
+                lastRead &&
+                <View>
+                  <Text className='text-white font-semibold text-base'>{lastRead.surah}</Text>
+                  <Text className='text-white font-light'>Ayat - No. {lastRead.ayat}</Text>
+                  <Text className='text-white font-light'>Baca {'>'}</Text>
+                </View>
+              }
             </View>
 
             <Image 

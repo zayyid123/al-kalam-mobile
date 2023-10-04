@@ -1,8 +1,9 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useColorScheme } from "nativewind";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // svg
 import IconBookmarkPutih from '../../assets/icons/bookmark_putih.svg'
@@ -15,16 +16,41 @@ const DetailSurah = () => {
   const { id } = useLocalSearchParams();
   const { colorScheme, toggleColorScheme } = useColorScheme()
   const [allDetailSurah, setallDetailSurah] = useState()
+  const [lastRead, setlastRead] = useState()
 
   useEffect(() => {
     const getDetailSurah = async (my_id) => {
       setallDetailSurah(detailSurahs[my_id-1].data.data)
-    }
+    } 
 
     if (id) {
       getDetailSurah(id)
     }
   }, [])
+
+  useEffect(() => {
+    const getLastRead = async() => {
+      try {
+        const value = await AsyncStorage.getItem('last_read');
+        if (value !== null) {
+          setlastRead(JSON.parse(value))
+        }
+      } catch (error) {
+        alert(error)
+      }
+    }
+
+    getLastRead()
+  }, [])
+  
+  const addLastRead = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+      Alert.alert('Terakhir Dibaca','Berhasil menambahkan ke terakhir dibaca')
+    } catch (error) {
+      Alert.alert('Error',error)
+    }
+  };
 
   if (!allDetailSurah) {
     return (
@@ -130,8 +156,7 @@ const DetailSurah = () => {
           scrollEnabled={false}
           renderItem={({item}) => {
             return(
-              // <Text>{item.surah_id}</Text>
-              <CardAyat data={item}/>
+              <CardAyat data={item} storeData={addLastRead} lastRead={lastRead} setlastRead={setlastRead}/>
             )
           }}
           keyExtractor={item => item.id}

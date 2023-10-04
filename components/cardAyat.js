@@ -4,9 +4,10 @@ import { useColorScheme } from "nativewind";
 
 // svg icon
 import IconPin from '../assets/icons/pin.svg'
+import IconPined from '../assets/icons/pined.svg'
 import IconShare from '../assets/icons/share.svg'
 
-const CardAyat = ({ data }) => {
+const CardAyat = ({ data, storeData, lastRead, setlastRead }) => {
   const { colorScheme, toggleColorScheme } = useColorScheme()
 
   return (
@@ -36,10 +37,33 @@ const CardAyat = ({ data }) => {
           </TouchableOpacity>
 
           {/* icon pin */}
-          <TouchableOpacity>
-            <View>
-              <IconPin width={25} height={25} />
-            </View>
+          <TouchableOpacity
+            onPress={() => {
+              storeData('last_read', JSON.stringify(
+                {
+                  ayat: data.ayah,
+                  noSurah: data.surah.id,
+                  surah: data.surah.latin
+                }
+              ))
+              setlastRead({
+                ayat: data.ayah,
+                noSurah: data.surah.id,
+                surah: data.surah.latin
+              })
+            }}
+          >
+            {
+              lastRead &&
+              <View>
+                {
+                  ( lastRead.ayat === data.ayah && lastRead.noSurah === data.surah.id && lastRead.surah === data.surah.latin ) ?
+                  <IconPined width={25} height={25} />
+                  :
+                  <IconPin width={25} height={25} />
+                }
+              </View>
+            }
           </TouchableOpacity>
         </View>
       </View>
