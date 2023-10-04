@@ -3,6 +3,7 @@
     "orientation": "portrait",
     "icon": "./assets/logo/icon.png",
     "scheme": "acme",
+    "version": "1.0.0",
     "web": {
       "bundler": "metro"
     },
@@ -15,15 +16,26 @@
       "expo-router"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo/adaptive-icon.png",
         "backgroundColor": "#fff"
+      },
+      "versionCode": 1
+    },
+    "name": "Al-Kalam",
+    "slug": "al-kalam",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "29c44e44-0c55-4578-839a-edbe4ff7ec8c"
       }
     },
-    "name": "al-kalam",
-    "slug": "al-kalam"
+    "owner": "zayyid123"
   }
 }
