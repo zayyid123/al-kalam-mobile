@@ -132,7 +132,12 @@ export default function Page() {
           </TouchableOpacity>
 
           {/* Adzan */}
-          <TouchableOpacity className='w-[50%]'>
+          <TouchableOpacity 
+            className='w-[50%]'
+            onPress={() => {
+              router.push('/adzan')
+            }}
+          >
             <LinearGradient
               colors={[colorScheme === 'dark' ? '#065a43' : '#c55fa8', colorScheme === 'dark' ? '#058a61' : '#CC80B7']}
               className='p-3 mr-3 ml-1 rounded-xl'

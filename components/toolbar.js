@@ -1,31 +1,30 @@
 import React, { useState } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { Image, Pressable, Text, View } from 'react-native'
 import { router } from 'expo-router';
 import { useColorScheme } from 'nativewind';
 
 // svg
-import IconPerson from '../assets/icons/person.svg'
 import IconHome from '../assets/icons/home.svg'
 import IconBookmark from '../assets/icons/bookmark.svg'
 
 const Toolbar = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
-  const [isPersonClicked, setisPersonClicked] = useState(false)
+  const [isDuaClicked, setisDuaClicked] = useState(false)
   const [isHomeClicked, setisHomeClicked] = useState(false)
   const [isBookmarkClicked, setisBookmarkClicked] = useState(false)
 
-  const handleClickPerson = () => {
-    setisPersonClicked(!isPersonClicked)
+  const handleClickDua = () => {
+    setisDuaClicked(!isDuaClicked)
     setisHomeClicked(false)
     setisBookmarkClicked(false)
-    router.push('/profile');
+    router.push('/doa');
     setTimeout(() => {
-      setisPersonClicked(false)
+      setisDuaClicked(false)
     }, 500);
   }
 
   const handleClickHome = () => {
-    setisPersonClicked(false)
+    setisDuaClicked(false)
     setisHomeClicked(!isHomeClicked)
     setisBookmarkClicked(false)
     router.push('/');
@@ -35,7 +34,7 @@ const Toolbar = () => {
   }
 
   const handleClickBookmark = () => {
-    setisPersonClicked(false)
+    setisDuaClicked(false)
     setisHomeClicked(false)
     setisBookmarkClicked(!isBookmarkClicked)
     router.push('/bookmark');
@@ -47,22 +46,6 @@ const Toolbar = () => {
   return (
     <View className='bg-white rounded-t-xl absolute bottom-0 right-0 left-0'>
       <View className='flex-row justify-evenly items-center'>
-        {/* person */}
-        <Pressable
-          className='items-center'
-          onPress={() => {
-            handleClickPerson()
-          }}
-        >
-          <View className={`p-3 border-4 border-white ${isPersonClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
-            <IconPerson width={23} height={23}/>
-          </View>
-          {
-            isPersonClicked &&
-            <Text className='absolute bottom-2 m-auto text-xs'>Profile</Text>
-          }
-        </Pressable>
-
         {/* home */}
         <Pressable
           className='items-center'
@@ -76,6 +59,22 @@ const Toolbar = () => {
           {
             isHomeClicked &&
             <Text className='absolute bottom-2 m-auto text-xs'>Home</Text>
+          }
+        </Pressable>
+
+        {/* dua */}
+        <Pressable
+          className='items-center'
+          onPress={() => {
+            handleClickDua()
+          }}
+        >
+          <View className={`p-3 border-4 border-white ${isDuaClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
+            <Image source={require('../assets/image/praying.png')} className='w-[25px] h-[25px]'/>
+          </View>
+          {
+            isDuaClicked &&
+            <Text className='absolute bottom-2 m-auto text-xs'>Du'a</Text>
           }
         </Pressable>
 
