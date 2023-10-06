@@ -10,12 +10,25 @@ import IconBookmark from '../assets/icons/bookmark.svg'
 const Toolbar = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const [isDuaClicked, setisDuaClicked] = useState(false)
+  const [isAdzanClicked, setisAdzanClicked] = useState(false)
   const [isHomeClicked, setisHomeClicked] = useState(false)
   const [isBookmarkClicked, setisBookmarkClicked] = useState(false)
+
+  const handleClickAdzan = () => {
+    setisDuaClicked(false)
+    setisHomeClicked(false)
+    setisAdzanClicked(!isAdzanClicked)
+    setisBookmarkClicked(false)
+    router.push('/adzan');
+    setTimeout(() => {
+      setisAdzanClicked(false)
+    }, 500);
+  }
 
   const handleClickDua = () => {
     setisDuaClicked(!isDuaClicked)
     setisHomeClicked(false)
+    setisAdzanClicked(false)
     setisBookmarkClicked(false)
     router.push('/doa');
     setTimeout(() => {
@@ -26,6 +39,7 @@ const Toolbar = () => {
   const handleClickHome = () => {
     setisDuaClicked(false)
     setisHomeClicked(!isHomeClicked)
+    setisAdzanClicked(false)
     setisBookmarkClicked(false)
     router.push('/');
     setTimeout(() => {
@@ -36,6 +50,7 @@ const Toolbar = () => {
   const handleClickBookmark = () => {
     setisDuaClicked(false)
     setisHomeClicked(false)
+    setisAdzanClicked(false)
     setisBookmarkClicked(!isBookmarkClicked)
     router.push('/bookmark');
     setTimeout(() => {
@@ -75,6 +90,22 @@ const Toolbar = () => {
           {
             isDuaClicked &&
             <Text className='absolute bottom-2 m-auto text-xs'>Du'a</Text>
+          }
+        </Pressable>
+
+        {/* adzan */}
+        <Pressable
+          className='items-center'
+          onPress={() => {
+            handleClickAdzan()
+          }}
+        >
+          <View className={`p-3 border-4 border-white ${isAdzanClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
+            <Image source={require('../assets/image/adzan.png')} className='w-[25px] h-[25px]'/>
+          </View>
+          {
+            isAdzanClicked &&
+            <Text className='absolute bottom-2 m-auto text-xs'>Adzan</Text>
           }
         </Pressable>
 

@@ -3,6 +3,7 @@ import { router } from 'expo-router';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native'
 
 const CardBookmark = ({ id_surah, removeBookmark, dataSurah }) => {
+
   return (
     <View
       className='bg-white p-3 mx-3 mb-3 rounded-xl flex-row justify-between items-center'
@@ -27,7 +28,7 @@ const CardBookmark = ({ id_surah, removeBookmark, dataSurah }) => {
             className='ml-3'
           >
             <Text className='font-semibold text-lg'>{dataSurah[id_surah-1].nama_latin}</Text>
-            <Text>{dataSurah[id_surah+1].tempat_turun === 'mekah' ? 'Makiyah' : 'Madaniyah'} - {dataSurah[id_surah-1].jumlah_ayat} ayat</Text>
+            <Text>{dataSurah[id_surah-1].tempat_turun === 'mekah' ? 'Makiyah' : 'Madaniyah'} - {dataSurah[id_surah-1].jumlah_ayat} ayat</Text>
           </View>
         </View>
       </TouchableOpacity>

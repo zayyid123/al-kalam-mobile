@@ -1,11 +1,11 @@
 import { axiosInstance } from "../config/fetchAxios";
 
-export const GetAllDataSurah = async () => {
-    const response = axiosInstance.get(`/quran-ayah`);
+export const GetAllDataKota = async () => {
+    const response = axiosInstance.get(`/kota.json`);
     return response;
 };
 
-export const GetDetailSurah = async (id) => {
-    const response = axiosInstance.get(`/quran-ayah?surah=${id}`);
+export const GetAllDataAdzan = async (city, tahun, bulan) => {
+    const response = axiosInstance.get(`/adzan/${city}/${tahun}/${bulan}.json`);
     return response;
 };
