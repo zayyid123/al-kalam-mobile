@@ -6,6 +6,7 @@ import { Audio } from 'expo-av';
 import NavigationPlayer from '../assets/icons/navigation-audio.svg'
 import PlayQuran from '../assets/icons/play-audio.svg'
 import PauseQuran from '../assets/icons/pause-audio.svg'
+import { Slider } from '@react-native-assets/slider';
 
 const QuranPlayer = ({ id_surah }) => {
   const [progress, setprogress] = useState(0)
@@ -87,16 +88,11 @@ const QuranPlayer = ({ id_surah }) => {
       sound.setPositionAsync(stateStatus.positionMillis - 1000)
     }
   }
-
-  const updateProgress = (duration, currentTime) => {
-    const progressPercent = (currentTime / duration) * 100
-    setprogress(progressPercent)
-  }
   
   onplaybackstatusupdate = async (playbackstatus) => {
     setstateStatus({ ...playbackstatus })
     setisPlay(playbackstatus.isPlaying)
-    updateProgress(playbackstatus.durationMillis, playbackstatus.positionMillis)
+    setprogress(playbackstatus.positionMillis)
   }
 
   useEffect(() => {
@@ -112,8 +108,16 @@ const QuranPlayer = ({ id_surah }) => {
       className='bg-white p-3 rounded-lg flex-row justify-between items-center'
     >
       {/* bar */}
-      <View className='bg-gray-700 w-[60%] h-2 my-2 rounded-lg' >
-        <View className='bg-teal-600 h-2 w-0 rounded-lg' style={{ width: progress + '%' }}></View>
+      <View className='w-[55%]' >
+        <Slider
+          value={progress}
+          minimumValue={0}
+          maximumValue={stateStatus ? stateStatus.durationMillis : 0}
+          minimumTrackTintColor='#0D9488'
+          onValueChange={(value) => {
+            sound.setPositionAsync(value)
+          }}
+        />
       </View>
 
       {/* player */}
@@ -129,7 +133,7 @@ const QuranPlayer = ({ id_surah }) => {
             }}
           >
             <View
-              className='-rotate-180 bg-[#def7f5] p-2 rounded-full'
+              className='-rotate-180 bg-[#def7f5] p-3 rounded-full'
             >
               <NavigationPlayer width={15} height={15} />
             </View>
@@ -147,7 +151,7 @@ const QuranPlayer = ({ id_surah }) => {
                       }}
                     >
                       <View
-                        className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
+                        className='bg-[#def7f5] p-3 rounded-full mx-1 my-1'
                       >
                         <View className='bg-black w-[20px] h-[20px] m-[2.5px]'></View>
                       </View>
@@ -159,7 +163,7 @@ const QuranPlayer = ({ id_surah }) => {
                     }}
                   >
                     <View
-                      className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
+                      className='bg-[#def7f5] p-3 rounded-full mx-1 my-1'
                     >
                       <PlayQuran width={25} height={25}/>
                     </View>
@@ -171,7 +175,7 @@ const QuranPlayer = ({ id_surah }) => {
                   }}
                 >
                   <View
-                    className='bg-[#def7f5] p-2 rounded-full mx-2 my-1'
+                    className='bg-[#def7f5] p-3 rounded-full mx-1 my-1'
                   >
                     <PauseQuran width={25} height={25}/>
                   </View>
@@ -180,7 +184,7 @@ const QuranPlayer = ({ id_surah }) => {
             </View>
             :
             <View
-              className='p-2 rounded-full mx-2 my-2'
+              className='p-3 rounded-full mx-1 my-2'
             >
               <ActivityIndicator size="small" />
             </View>
@@ -193,7 +197,7 @@ const QuranPlayer = ({ id_surah }) => {
             }}
           >
             <View
-              className='bg-[#def7f5] p-2 rounded-full'
+              className='bg-[#def7f5] p-3 rounded-full'
             >
               <NavigationPlayer width={15} height={15}/>
             </View>
