@@ -13,8 +13,22 @@ const Toolbar = () => {
   const [isAdzanClicked, setisAdzanClicked] = useState(false)
   const [isHomeClicked, setisHomeClicked] = useState(false)
   const [isBookmarkClicked, setisBookmarkClicked] = useState(false)
+  const [isQuranClicked, setisQuranClicked] = useState(false)
+
+  const handleClickQuran = () => {
+    setisQuranClicked(!isQuranClicked)
+    setisDuaClicked(false)
+    setisHomeClicked(false)
+    setisAdzanClicked(false)
+    setisBookmarkClicked(false)
+    router.push('/surah');
+    setTimeout(() => {
+      setisQuranClicked(false)
+    }, 300);
+  }
 
   const handleClickAdzan = () => {
+    setisQuranClicked(false)
     setisDuaClicked(false)
     setisHomeClicked(false)
     setisAdzanClicked(!isAdzanClicked)
@@ -22,10 +36,11 @@ const Toolbar = () => {
     router.push('/adzan');
     setTimeout(() => {
       setisAdzanClicked(false)
-    }, 500);
+    }, 300);
   }
 
   const handleClickDua = () => {
+    setisQuranClicked(false)
     setisDuaClicked(!isDuaClicked)
     setisHomeClicked(false)
     setisAdzanClicked(false)
@@ -33,10 +48,11 @@ const Toolbar = () => {
     router.push('/doa');
     setTimeout(() => {
       setisDuaClicked(false)
-    }, 500);
+    }, 300);
   }
 
   const handleClickHome = () => {
+    setisQuranClicked(false)
     setisDuaClicked(false)
     setisHomeClicked(!isHomeClicked)
     setisAdzanClicked(false)
@@ -44,10 +60,11 @@ const Toolbar = () => {
     router.push('/');
     setTimeout(() => {
       setisHomeClicked(false)
-    }, 500);
+    }, 300);
   }
 
   const handleClickBookmark = () => {
+    setisQuranClicked(false)
     setisDuaClicked(false)
     setisHomeClicked(false)
     setisAdzanClicked(false)
@@ -55,25 +72,25 @@ const Toolbar = () => {
     router.push('/bookmark');
     setTimeout(() => {
       setisBookmarkClicked(false)
-    }, 500);
+    }, 300);
   }
 
   return (
     <View className='bg-white rounded-t-xl absolute bottom-0 right-0 left-0'>
-      <View className='flex-row justify-evenly items-center'>
-        {/* home */}
+      <View className='flex-row justify-evenly items-center z-10'>
+        {/* quran */}
         <Pressable
           className='items-center'
           onPress={() => {
-            handleClickHome()
+            handleClickQuran()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isHomeClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
-            <IconHome width={23} height={23}/>
+          <View className={`p-3 border-4 border-white ${isQuranClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-3xl translate-y-[-30px] bg-[#f79d4a]`}`}>
+            <Image source={require('../assets/image/quran-toolbar.png')} className='w-[25px] h-[25px]'/>
           </View>
           {
-            isHomeClicked &&
-            <Text className='absolute bottom-2 m-auto text-xs'>Home</Text>
+            isQuranClicked &&
+            <Text className='absolute bottom-2 m-auto text-xs'>Quran</Text>
           }
         </Pressable>
 
@@ -84,12 +101,28 @@ const Toolbar = () => {
             handleClickDua()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isDuaClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
+          <View className={`p-3 border-4 border-white ${isDuaClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-3xl translate-y-[-30px] bg-[#f79d4a]`}`}>
             <Image source={require('../assets/image/praying.png')} className='w-[25px] h-[25px]'/>
           </View>
           {
             isDuaClicked &&
             <Text className='absolute bottom-2 m-auto text-xs'>Du'a</Text>
+          }
+        </Pressable>
+
+        {/* home */}
+        <Pressable
+          className='items-center'
+          onPress={() => {
+            handleClickHome()
+          }}
+        >
+          <View className={`p-3 border-4 border-white ${colorScheme === 'dark' ? 'bg-slate-400' : 'bg-blue-400'} rounded-3xl ${isHomeClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-3xl translate-y-[-30px] bg-[#f79d4a]`}`}>
+            <IconHome width={23} height={23} style={{color: '#fff'}} />
+          </View>
+          {
+            isHomeClicked &&
+            <Text className='absolute bottom-2 m-auto text-xs'>Home</Text>
           }
         </Pressable>
 
@@ -100,7 +133,7 @@ const Toolbar = () => {
             handleClickAdzan()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isAdzanClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
+          <View className={`p-3 border-4 border-slate-100 ${isAdzanClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-3xl translate-y-[-30px] bg-[#f79d4a]`}`}>
             <Image source={require('../assets/image/adzan.png')} className='w-[25px] h-[25px]'/>
           </View>
           {
@@ -116,7 +149,7 @@ const Toolbar = () => {
             handleClickBookmark()
           }}
         >
-          <View className={`p-3 border-4 border-white ${isBookmarkClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-full translate-y-[-30px] bg-[#f79d4a]`}`}>
+          <View className={`p-3 border-4 border-slate-100 ${isBookmarkClicked && `${colorScheme === 'dark' ? 'border-[#22282c]' : 'border-[#67d1fc]'} rounded-3xl translate-y-[-30px] bg-[#f79d4a]`}`}>
             <IconBookmark width={23} height={23}/>
           </View>
           {
@@ -124,6 +157,10 @@ const Toolbar = () => {
             <Text className='absolute bottom-2 m-auto text-xs'>Bookmark</Text>
           }
         </Pressable>
+      </View>
+      <View
+        className='bg-slate-100 absolute top-0 right-0 w-[50%] z-0 h-full rounded-tl-lg rounded-bl-lg rounded-tr-xl'
+      >
       </View>
     </View>
   )

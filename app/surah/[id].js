@@ -106,7 +106,7 @@ const DetailSurah = () => {
       <View
         className='flex-1 justify-center items-center'
       >
-        <Text className={`font-bold text-lg ${colorScheme === 'dark' && 'text-white'}`}>Loading...</Text>
+        <ActivityIndicator size={'large'}/>
       </View>
     )
   }

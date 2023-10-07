@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useColorScheme } from 'nativewind';
 import { router } from 'expo-router';
 
@@ -13,6 +13,16 @@ const SurahPage = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const [allDataSurah, setallDataSurah] = useState(AllDataSurahJson);
   const [searchValue, setsearchValue] = useState('')
+
+  if (!allDataSurah) {
+    return (
+      <View
+        className='flex-1 justify-center items-center'
+      >
+        <ActivityIndicator size={'large'}/>
+      </View>
+    )
+  }
 
   return (
     <View className='mx-3'>

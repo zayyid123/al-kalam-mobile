@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, Text, TextInput, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, Text, TextInput, View } from 'react-native'
 import { useColorScheme } from "nativewind";
 
 // db doa
@@ -16,6 +16,16 @@ const DoaPage = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const [allDataDua, setallDataDua] = useState(Db_doa)
   const [searchValue, setsearchValue] = useState('')
+
+  if (!allDataDua) {
+    return (
+      <View
+        className='flex-1 justify-center items-center'
+      >
+        <ActivityIndicator size={'large'}/>
+      </View>
+    )
+  }
 
   return (
     <View

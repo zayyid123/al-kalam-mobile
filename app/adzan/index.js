@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useEffect, useState } from 'react'
-import { Image, Text, View } from 'react-native'
+import { ActivityIndicator, Image, Text, View } from 'react-native'
 import { useColorScheme } from "nativewind";
 import { Picker } from '@react-native-picker/picker';
 import { GetAllDataAdzan, GetAllDataKota } from '../../services/surahServices';
@@ -101,6 +101,16 @@ const AdzanPage = () => {
     getAllKota()
     getDataAdzan()
   }, [selectedCity])
+
+  if (!city) {
+    return (
+      <View
+        className='flex-1 justify-center items-center'
+      >
+        <ActivityIndicator size={'large'}/>
+      </View>
+    )
+  }
 
   return (
     <View>
