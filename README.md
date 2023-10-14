@@ -1,6 +1,6 @@
 # Al - Kalam: A Modern Mobile Quran App
 
-![Al - Kalam Logo](https://drive.google.com/file/d/1jPJZMwr_HhJgN_ydCR8noBenBIGMffQd/preview)
+![Al - Kalam Logo](https://raw.githubusercontent.com/zayyid123/al-kalam-mobile/main/al%20kalam%20mobile.png)
 
 **Al - Kalam** is a beautifully designed mobile application that provides easy access to the Quran. Built using React Native and styled with Tailwind CSS, **Al - Kalam** offers a seamless Quran reading experience with a modern and user-friendly interface.
 
